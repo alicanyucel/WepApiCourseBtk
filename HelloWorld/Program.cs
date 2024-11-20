@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Hosting;
+
 namespace HelloWorld
 {
     public class Program
@@ -11,10 +13,12 @@ namespace HelloWorld
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-            app.UseSwagger();
-            app.UseSwaggerUI();
-            app.MapGet("/", () => "Hello World!");
-
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+            app.MapControllers();
             app.Run();
         }
     }
