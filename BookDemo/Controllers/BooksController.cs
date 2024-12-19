@@ -63,8 +63,25 @@ namespace BookDemo.Controllers
 
             return Ok(book);
         }
-       
+        [HttpDelete]
+        public IActionResult DeleteAllBooks()
+        {
+            ApplicationDbContext.Books.Clear(); 
+            return NoContent();// 204
+        }
 
+        [HttpDelete("{id:int}")]
+        public IActionResult DeleteBookById([FromRoute(Name = "id")]int id)
+        {
+            var entity=ApplicationDbContext.Books.Find(b=>b.Id.Equals(id));
+            if (entity is null)
+            {
+                return NotFound(); 
+            }
+
+            ApplicationDbContext.Books.Remove(entity);
+            return NoContent();
+        }
 
     }
 }
