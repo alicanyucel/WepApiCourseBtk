@@ -1,5 +1,6 @@
 ﻿using BookDemo.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
 
@@ -82,6 +83,17 @@ namespace BookDemo.Controllers
             ApplicationDbContext.Books.Remove(entity);
             return NoContent();
         }
-
+        [HttpPatch("{id:int}")]
+        public IActionResult PatchBook([FromRoute(Name = "id")]int id,[FromBody] JsonPatchDocument<Book> bookPatch)
+        {
+            // check
+            var entity = ApplicationDbContext.Books.Find(b => b.Id.Equals(id));
+            if (entity is null)
+            {
+                return NotFound();
+            }
+            bookPatch.ApplyTo(entity);
+            return NoContent();
+        }
     }
 }
