@@ -24,13 +24,13 @@ namespace BookStoreApp
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.MapControllers();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
 
-            app.MapControllers();
+           
 
             app.Run();
         }
