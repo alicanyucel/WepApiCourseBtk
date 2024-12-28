@@ -1,8 +1,7 @@
 ﻿using BookDemo.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace BookDemo.Controllers
 {
