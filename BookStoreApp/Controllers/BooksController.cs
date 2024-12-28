@@ -38,6 +38,7 @@ namespace BookStoreApp.Controllers
                     return BadRequest();
                 _context.Books.Add(book);
                 return StatusCode(201, book);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -63,14 +64,16 @@ namespace BookStoreApp.Controllers
             book.Id = entity.Id;
             // added to List
             _context.Books.Add(book);
-
+            _context.SaveChanges();
             return Ok(book);
         }
         [HttpDelete]
         public IActionResult DeleteAllBooks()
         {
             _context.Books.Clear();
+            _context.SaveChanges();
             return NoContent();// 204
+            
         }
 
         [HttpDelete("{id:int}")]
@@ -83,6 +86,7 @@ namespace BookStoreApp.Controllers
             }
 
            _context.Books.Remove(entity);
+            _context.SaveChanges();
             return NoContent();
         }
         [HttpPatch("{id:int}")]
@@ -95,6 +99,7 @@ namespace BookStoreApp.Controllers
                 return NotFound();
             }
             bookPatch.ApplyTo(entity);
+            _context.SaveChanges();
             return NoContent();
         }
     }
