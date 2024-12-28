@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Text;
 
 namespace BookStoreApp.Controllers
 {
@@ -7,9 +8,11 @@ namespace BookStoreApp.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
+        // kontrol
         [HttpGet]
         public async Task<IActionResult> GetAllBooks()
         {
+            
             return Ok();
         }
     }
